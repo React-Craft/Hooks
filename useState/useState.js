@@ -21,5 +21,7 @@ function useState(initialValue) {
   }
 
   stateIndex++;
+
+  console.log(state);
   return [getState, setState];
 }
