@@ -1,6 +1,14 @@
+state = [];
+stateIndex = 0;
+
 function useState(initialValue) {
-  let getState = "getState";
-  let setState = "setState";
+  function getState() {
+    return getState;
+  }
+
+  function setState() {
+    return setState;
+  }
 
   return [getState, setState];
 }
