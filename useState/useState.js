@@ -8,6 +8,7 @@ function useState(initialValue) {
   if (state[currentIndex] === undefined) {
     console.log(2, state[currentIndex]);
     state[currentIndex] = initialValue;
+    console.log("최초 init", state[currentIndex]);
   }
 
   function getState() {
@@ -15,8 +16,11 @@ function useState(initialValue) {
   }
 
   function setState(newValue) {
+    console.log("방금 들어옴", newValue);
+
     state[currentIndex] = newValue;
-    console.log(state[currentIndex]);
+    console.log("방금 바뀜", state);
+
     return "값 추가";
   }
 

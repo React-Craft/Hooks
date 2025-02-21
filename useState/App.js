@@ -7,16 +7,16 @@ function App() {
   // console.log(a(), b());
 
   function increase() {
-    setCount(a() + 1);
+    setA(a() + 1);
   }
 
-  console.log(a(), setA());
+  console.log(a());
 
   document.getElementById("app").innerHTML = `
     <h1>count: ${a()}</h1>
     <button id="a">클릭</button>
   `;
-  document.getElementById("increase").addEventListener("click", increase);
+  document.getElementById("a").addEventListener("click", increase);
 }
 
 App();
