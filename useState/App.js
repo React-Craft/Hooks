@@ -1,6 +1,6 @@
 function App() {
-  const [a, setA] = useState("");
-  console.log(a, setA);
+  const [a, setA] = useState("test");
+  console.log(a(), setA);
 }
 
 App();
