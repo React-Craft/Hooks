@@ -14,9 +14,12 @@ function useState(initialValue) {
     return state[currentIndex];
   }
 
-  function setState() {
-    return "setState";
+  function setState(newValue) {
+    state[currentIndex] = newValue;
+    console.log(state[currentIndex]);
+    return "값 추가";
   }
 
+  stateIndex++;
   return [getState, setState];
 }
