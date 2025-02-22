@@ -7,7 +7,8 @@ function App() {
   const [b, setB] = useState(0);
 
   useEffect(() => {
-    console.log("d");
+    console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
+    setCount(getCount() + 1);
   }, []);
 
   function handleUpdateText() {
