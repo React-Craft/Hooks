@@ -29,5 +29,3 @@ function App() {
   document.getElementById("a").addEventListener("click", increaseA);
   document.getElementById("b").addEventListener("click", increaseB);
 }
-
-App();
