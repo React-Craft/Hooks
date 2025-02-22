@@ -6,6 +6,10 @@ function App() {
   const [a, setA] = useState("True");
   const [b, setB] = useState(0);
 
+  useEffect(() => {
+    console.log("d");
+  }, []);
+
   function handleUpdateText() {
     setA(a() === "True" ? "false" : "True");
   }
