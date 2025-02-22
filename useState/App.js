@@ -1,5 +1,4 @@
 function App() {
-  resetStateIndex();
   console.log("✅✅✅ 랜더링 ✅✅✅");
   const [a, setA] = useState(0);
   const [b, setB] = useState(0);
