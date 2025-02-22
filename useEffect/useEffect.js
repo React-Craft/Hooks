@@ -1,19 +1,27 @@
-//
+const useEffectStore = [];
+
 function useEffect(callback, dependencies) {
+  const prevDependencies = useEffectStore[stateIndex] || [];
+
   console.log(callback, dependencies);
 
-  // 의존성 배열 자체가 안들어 옸을때
+  // 의존성 없으면 바로 실행
   if (dependencies === undefined) {
-    setTimeout(callback, 0); // 렌더링 이후 실행
+    setTimeout(callback, 0);
     return;
   }
-  // 의존성 배열이 값이 없을때
-  if (dependencies.length === 0) {
-    //
-  }
-  // 의존성 배열에 값이 있을때,
+
+  let isChanged = false;
+
   if (dependencies) {
-    //
+    for (let i = 0; i < dependencies.length; i++) {
+      if (dependencies[i] !== prevDependencies[i]) {
+        console.log("없음, 지금", i);
+        isChanged = true;
+        break;
+      }
+    }
   }
-  //
+
+  console.log(isChanged);
 }

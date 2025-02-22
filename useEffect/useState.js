@@ -1,19 +1,19 @@
-const stateStore = [];
+const useStateStore = [];
 let stateIndex = 0;
 
 function useState(initialValue) {
   const currentIndex = stateIndex;
 
-  if (stateStore[currentIndex] === undefined) {
-    stateStore[currentIndex] = initialValue;
+  if (useStateStore[currentIndex] === undefined) {
+    useStateStore[currentIndex] = initialValue;
   }
 
   function getState() {
-    return stateStore[currentIndex];
+    return useStateStore[currentIndex];
   }
 
   function setState(newValue) {
-    stateStore[currentIndex] = newValue;
+    useStateStore[currentIndex] = newValue;
     App();
   }
 

@@ -9,7 +9,7 @@ function App() {
   useEffect(() => {
     console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
     setCount(getCount() + 1);
-  }, []);
+  }, [a()]);
 
   function handleUpdateText() {
     setA(a() === "True" ? "false" : "True");
