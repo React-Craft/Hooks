@@ -1,14 +1,19 @@
 const useEffectStore = [];
+let firstRender = false;
 
 function useEffect(callback, dependencies) {
   const prevDependencies = useEffectStore[stateIndex] || [];
-
-  // console.log(callback, dependencies);
 
   // 의존성 없으면 바로 실행
   if (dependencies === undefined) {
     setTimeout(callback, 0);
     return;
+  }
+
+  if (dependencies.length === 0 && !firstRender) {
+    setTimeout(callback, 0);
+
+    firstRender = true;
   }
 
   let isChanged = false;
@@ -23,15 +28,13 @@ function useEffect(callback, dependencies) {
     }
   }
 
-  console.log(useEffectStore);
-  console.log(useEffectStore[stateIndex]);
-  console.log(dependencies);
-  console.log("바뀌었는지", isChanged);
+  // console.log(useEffectStore);
+  // console.log(useEffectStore[stateIndex]);
+  // console.log(dependencies);
+  // console.log("바뀌었는지", isChanged);
 
   if (isChanged) {
     setTimeout(callback, 0);
     useEffectStore[stateIndex] = dependencies;
   }
-
-  console.log(isChanged);
 }

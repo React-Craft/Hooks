@@ -7,9 +7,14 @@ function App() {
   const [b, setB] = useState(0);
 
   useEffect(() => {
-    // console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
+    console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
     setCount(getCount() + 1);
-  }, [a()]);
+  }, []);
+
+  useEffect(() => {
+    console.log("🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌");
+    setCount(getCount() + 1);
+  }, [a(), b()]);
 
   function handleUpdateText() {
     setA(a() === "True" ? "false" : "True");
