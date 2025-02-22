@@ -32,7 +32,6 @@ function useState(initialValue) {
     // console.log("방금 바뀜", state);
     // 재렌더링
     App();
-    stateStore.resetStateIndex();
   }
 
   //useState 갯수만큼 중가함
