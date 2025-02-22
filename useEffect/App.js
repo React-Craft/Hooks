@@ -7,7 +7,7 @@ function App() {
   const [b, setB] = useState(0);
 
   useEffect(() => {
-    console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
+    // console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
     setCount(getCount() + 1);
   }, [a()]);
 
@@ -19,7 +19,7 @@ function App() {
     setB(b() + 1);
   }
 
-  console.log(a(), b());
+  // console.log(a(), b());
 
   document.getElementById("app").innerHTML = `
     <h1>Count: ${getCount()}</h1>
