@@ -6,11 +6,8 @@
 function useState(initialValue) {
   const currentIndex = stateStore.stateIndex;
 
-  // console.log(1, state[currentIndex]);
   if (stateStore.state[currentIndex] === undefined) {
-    // console.log(2, state[currentIndex]);
     stateStore.state[currentIndex] = initialValue;
-    // console.log("최초 init", state[currentIndex]);
   }
 
   function getState() {
@@ -18,25 +15,26 @@ function useState(initialValue) {
   }
 
   function setState(newValue) {
-    // console.log("방금 들어옴", newValue);
+    // if (typeof newValue === "function") {
+    //   newValue = newValue(stateStore.state[currentIndex]);
+    // }
 
-    stateStore.state[currentIndex] = newValue;
-    console.log(
-      "현재 index",
-      currentIndex,
-      "현재 전체 state",
-      stateStore.state,
-      "그리고 그 index에 대한 값",
-      stateStore.state[currentIndex]
-    );
-    // console.log("방금 바뀜", state);
-    // 재렌더링
-    App();
+    // 같은 인덱스의 setState 호출 시, 마지막 값으로 덮어쓰기
+    stateStore.updateQueue.set(currentIndex, newValue);
+
+    if (!stateStore.isUpdating) {
+      stateStore.isUpdating = true;
+      setTimeout(() => {
+        stateStore.updateQueue.forEach((value, index) => {
+          stateStore.state[index] = value; // 마지막 값만 적용
+        });
+        stateStore.updateQueue.clear();
+        stateStore.isUpdating = false;
+        App();
+      }, 0);
+    }
   }
 
-  //useState 갯수만큼 중가함
   stateStore.stateIndex++;
-
-  console.log("useState호출시, 현재 상태", stateStore.state);
   return [getState, setState];
 }

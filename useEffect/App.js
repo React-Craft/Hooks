@@ -9,12 +9,12 @@ function App() {
   useEffect(() => {
     console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
     setCount(getCount() + 1);
-  }, []);
+  }, [a()]);
 
-  useEffect(() => {
-    console.log("🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌");
-    setCount(getCount() + 1);
-  }, [a(), b()]);
+  // useEffect(() => {
+  //   console.log("🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌");
+  //   setCount(getCount() + 1);
+  // }, [a(), b()]);
 
   function handleUpdateText() {
     setA(a() === "True" ? "false" : "True");

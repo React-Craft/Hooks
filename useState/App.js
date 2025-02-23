@@ -12,7 +12,12 @@ function App() {
   // console.log(a(), b());
 
   function increaseA() {
+    console.log(`🍎${a()}`);
     setA(a() + 1);
+    console.log(`🍎${a()}`);
+    setA(a() + 1);
+
+    console.log("increaseA");
   }
 
   function increaseB() {
