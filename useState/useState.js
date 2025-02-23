@@ -36,8 +36,6 @@ function useState(initialValue) {
     if (!stateStore.isUpdating) {
       stateStore.isUpdating = true;
       setTimeout(() => {
-        console.log("setState 변경");
-
         stateStore.updateQueue.forEach(({ index, value }) => {
           stateStore.state[index] = value;
         });
