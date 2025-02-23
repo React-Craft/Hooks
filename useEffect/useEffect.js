@@ -2,7 +2,7 @@ const useEffectStore = [];
 let firstRender = false;
 
 function useEffect(callback, dependencies) {
-  const prevDependencies = useEffectStore[stateIndex] || [];
+  const prevDependencies = useEffectStore[stateStore.stateIndex] || [];
 
   // 의존성 없으면 바로 실행
   if (dependencies === undefined) {
@@ -35,6 +35,6 @@ function useEffect(callback, dependencies) {
 
   if (isChanged) {
     setTimeout(callback, 0);
-    useEffectStore[stateIndex] = dependencies;
+    useEffectStore[stateStore.stateIndex] = dependencies;
   }
 }

@@ -1,5 +1,5 @@
 function App() {
-  resetStateIndex();
+  stateStore.resetStateIndex();
   console.log("✅✅✅ 랜더링 ✅✅✅");
 
   const [getCount, setCount] = useState(0);
