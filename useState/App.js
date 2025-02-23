@@ -12,13 +12,14 @@ function App() {
   // console.log(a(), b());
 
   function increaseA() {
+    // setA(a() + 2); // 이전 값(prev)을 기준으로 +2
+    // console.log(`🍎${a()}`);
+    // setA(a() + 1); // 이전 값(prev)을 기준으로 +1
+    // console.log(`🍎${a()}`);
+    setA((prev) => prev + 2); // 이전 값(prev)을 기준으로 +2
     console.log(`🍎${a()}`);
-    setA(a() + 2);
+    setA((prev) => prev + 1); // 이전 값(prev)을 기준으로 +1
     console.log(`🍎${a()}`);
-
-    setA(a() + 1);
-
-    console.log("increaseA");
   }
 
   function increaseB() {

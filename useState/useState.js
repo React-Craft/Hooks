@@ -14,25 +14,31 @@ function useState(initialValue) {
   }
 
   function setState(newValue) {
-    // if (typeof newValue === "function") {
-    //   newValue = newValue(stateStore.state[currentIndex]);
-    // }
+    if (typeof newValue === "function") {
+      const existingItem = stateStore.updateQueue.find(
+        (item) => item.index === currentIndex
+      );
 
-    //  기존 값을 남기지 않고 마지막 값만 유지
+      let prevValue;
+      if (existingItem) {
+        prevValue = existingItem.value; // 큐에 값이 있으면 기존 값 사용
+      } else {
+        prevValue = stateStore.state[currentIndex]; // 없으면 현재 상태값 사용
+      }
+      newValue = newValue(prevValue);
+    }
 
-    console.log(stateStore.updateQueue);
     stateStore.updateQueue = stateStore.updateQueue.filter(
       (item) => item.index !== currentIndex
     );
-
-    // 새로운 값 추가
     stateStore.updateQueue.push({ index: currentIndex, value: newValue });
 
     if (!stateStore.isUpdating) {
       stateStore.isUpdating = true;
       setTimeout(() => {
+        console.log("setState 변경");
+
         stateStore.updateQueue.forEach(({ index, value }) => {
-          console.log("실행");
           stateStore.state[index] = value;
         });
 
