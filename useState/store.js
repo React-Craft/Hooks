@@ -1,7 +1,7 @@
 const stateStore = {
   state: [],
   stateIndex: 0,
-  updateQueue: new Map(),
+  updateQueue: [],
   isUpdating: false,
   resetStateIndex() {
     this.stateIndex = 0;

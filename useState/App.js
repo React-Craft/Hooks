@@ -13,8 +13,9 @@ function App() {
 
   function increaseA() {
     console.log(`🍎${a()}`);
-    setA(a() + 1);
+    setA(a() + 2);
     console.log(`🍎${a()}`);
+
     setA(a() + 1);
 
     console.log("increaseA");
