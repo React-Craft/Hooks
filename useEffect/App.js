@@ -9,13 +9,13 @@ function App() {
   useEffect(() => {
     console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
     // setCount(getCount() + 1);
-  }, [obj().value]);
+  }, [obj()]);
 
   // useEffect(() => {
   //   console.log("🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌");
   //   setCount(getCount() + 1);
   // }, [a(), b()]);
-  console.log(obj().value);
+  // console.log(obj().value);
 
   function handleUpdateText() {
     setA(a() === "True" ? "false" : "True");
@@ -26,7 +26,10 @@ function App() {
   }
 
   function increaseObject() {
-    setObj({ value: obj().value });
+    setObj((prev) => {
+      prev.value = prev.value + 1; // 내부 값만 변경
+      return prev; // 같은 객체 반환
+    });
   }
 
   // console.log(a(), b());
