@@ -10,5 +10,21 @@ function useMemo(callback, dependencies) {
 
   console.log(useMemoStore[currentIndex], currentIndex);
 
+  //   const temp = useMemoStore[currentIndex];
+  //   console.log(temp.dependencies, temp.value);
+
+  const { dependencies: prevDependencies, value: prevValue } =
+    useMemoStore[currentIndex];
+
+  let hasChanged = !prevDependencies;
+  console.log(hasChanged);
+  if (hasChanged) {
+    const newValue = callback();
+    useMemoStore[currentIndex] = { dependencies, value: newValue };
+    return newValue;
+  }
+
+  console.log({ dependencies: prevDependencies, value: prevValue });
+
   return currentIndex;
 }
