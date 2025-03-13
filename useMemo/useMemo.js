@@ -8,23 +8,27 @@ function useMemo(callback, dependencies) {
     useMemoStore[currentIndex] = { dependencies: undefined, value: undefined };
   }
 
-  console.log(useMemoStore[currentIndex], currentIndex);
-
-  //   const temp = useMemoStore[currentIndex];
-  //   console.log(temp.dependencies, temp.value);
-
+  // 이전 의존성 가져옴
   const { dependencies: prevDependencies, value: prevValue } =
     useMemoStore[currentIndex];
 
   let hasChanged = !prevDependencies;
-  console.log(hasChanged);
+  if (!hasChanged) {
+    for (let i = 0; i < dependencies.length; i++) {
+      if (dependencies[i] !== prevDependencies[i]) {
+        // 의존성 달라진거 있는지 비교
+        hasChanged = true;
+        break;
+      }
+    }
+  }
+
+  // 재실행
   if (hasChanged) {
     const newValue = callback();
     useMemoStore[currentIndex] = { dependencies, value: newValue };
     return newValue;
   }
 
-  console.log({ dependencies: prevDependencies, value: prevValue });
-
-  return currentIndex;
+  return prevValue;
 }
