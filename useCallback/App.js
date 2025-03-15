@@ -2,36 +2,43 @@ function App() {
   stateStore.resetStateIndex();
   console.log("✅✅✅ 랜더링 ✅✅✅");
 
-  const [a, setA] = useState("True");
-  const [b, setB] = useState(0);
+  const [count, setCount] = useState(0);
+  const [text, setText] = useState("");
 
-  const memoizedA = useMemo(() => {
-    console.log("📌 memoizedA 재계산!");
-    return a();
-  }, [a()]);
+  const handleClick = useCallback(() => {
+    // count가 변경될때마다 함수 새로 생성
+    console.log(`Count is: ${count()}`);
+  }, [count()]); // count() → count 수정!
 
-  const memoizedB = useMemo(() => {
-    console.log("📌 memoizedB 재계산!");
-    return b();
-  }, [b()]);
+  // const handleClick = () => {
+  //   console.log(`Count is: ${count()}`);
+  // };
+  function increase() {
+    setCount(count() + 1);
+  }
 
-  const handleUpdateText = useCallback(() => {
-    console.log("🔄 handleUpdateText 실행");
-    setA((prev) => (prev === "True" ? "false" : "True"));
-  }, [memoizedA]);
+  useEffect(() => {
+    console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
+  }, [handleClick]);
 
-  const increase = useCallback(() => {
-    console.log("🔄 increase 실행");
-    setB((prev) => prev + 1);
-  }, [memoizedB]);
+  let app = document.getElementById("app");
+  if (!app.innerHTML) {
+    app.innerHTML = `
+      <button id="a"> 숫자 올리기(캐시값 사용x) </button>
+      <button id="b"> 캐시값 사용 </button>
+      <input id="textInput" placeholder="Type something" />
+      <p id="textOutput"></p>
+    `;
 
-  document.getElementById("app").innerHTML = `
-    <button id="a"> ${memoizedA} </button>
-    <button id="b"> ${memoizedB} </button>
-  `;
+    document.getElementById("a").addEventListener("click", increase);
+    document.getElementById("b").addEventListener("click", handleClick);
 
-  document.getElementById("a").addEventListener("click", handleUpdateText);
-  document.getElementById("b").addEventListener("click", increase);
+    document.getElementById("textInput").addEventListener("input", (e) => {
+      setText(e.target.value);
+    });
+  }
+
+  document.getElementById("textInput").value = text();
 }
 
 App();
