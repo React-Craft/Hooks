@@ -3,11 +3,12 @@ function App() {
   console.log("✅✅✅ 랜더링 ✅✅✅");
 
   const [count, setCount] = useState(0);
-  const [text, setText] = useState("");
+  const [count2, setCount2] = useState(0);
 
-  const handleClick = useMemo(() => {
-    console.log(`Count is: ${count()}`);
-  }, [count]); // count() → count 수정!
+  const expensiveValue = useMemo(() => {
+    // 값을 반환해야함 ㅇㅇ
+    return count() * 2; // 예제용 단순 계산
+  }, [count()]); // count() → count 수정!
 
   // const handleClick = () => {
   //   console.log(`Count is: ${count}`);
@@ -16,28 +17,22 @@ function App() {
     setCount(count() + 1);
   }
 
-  useEffect(() => {
-    console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
-  }, [handleClick]);
-
-  let app = document.getElementById("app");
-  if (!app.innerHTML) {
-    app.innerHTML = `
-      <button id="a"> 숫자 올리기(캐시값 사용x) </button>
-      <button id="b"> 캐시값 사용 </button>
-      <input id="textInput" placeholder="Type something" />
-      <p id="textOutput"></p>
-    `;
-
-    document.getElementById("a").addEventListener("click", increase);
-    document.getElementById("b").addEventListener("click", handleClick);
-
-    document.getElementById("textInput").addEventListener("input", (e) => {
-      setText(e.target.value);
-    });
+  function increase2() {
+    setCount2(count2() + 1);
   }
 
-  document.getElementById("textInput").value = text();
+  useEffect(() => {
+    console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯", count());
+  }, [expensiveValue]);
+
+  document.getElementById("app").innerHTML = `
+      <p>${expensiveValue}</p>
+      <button id="a"> 숫자 올리기(캐시값 사용x) </button>
+      <button id="b"> 숫자 올리기(캐시값 사용) </button>
+    `;
+
+  document.getElementById("a").addEventListener("click", increase);
+  document.getElementById("b").addEventListener("click", increase2);
 }
 
 App();
