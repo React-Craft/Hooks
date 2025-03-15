@@ -2,34 +2,42 @@ function App() {
   stateStore.resetStateIndex();
   console.log("✅✅✅ 랜더링 ✅✅✅");
 
-  const [a, setA] = useState("True");
-  const [b, setB] = useState(0);
+  const [count, setCount] = useState(0);
+  const [text, setText] = useState("");
 
-  const memoizedA = useMemo(() => {
-    console.log("📌 memoizedA 재계산!");
-    return a();
-  }, [a()]);
+  const handleClick = useMemo(() => {
+    console.log(`Count is: ${count()}`);
+  }, [count]); // count() → count 수정!
 
-  const memoizedB = useMemo(() => {
-    console.log("📌 memoizedB 재계산!");
-    return b();
-  }, [b()]);
-
-  function handleUpdateText() {
-    setA(memoizedA === "True" ? "false" : "True");
-  }
-
+  // const handleClick = () => {
+  //   console.log(`Count is: ${count}`);
+  // };
   function increase() {
-    setB(memoizedB + 1);
+    setCount(count() + 1);
   }
 
-  document.getElementById("app").innerHTML = `
-    <button id="a"> ${memoizedA} </button>
-    <button id="b"> ${memoizedB} </button>
-  `;
+  useEffect(() => {
+    console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
+  }, [handleClick]);
 
-  document.getElementById("a").addEventListener("click", handleUpdateText);
-  document.getElementById("b").addEventListener("click", increase);
+  let app = document.getElementById("app");
+  if (!app.innerHTML) {
+    app.innerHTML = `
+      <button id="a"> 숫자 올리기(캐시값 사용x) </button>
+      <button id="b"> 캐시값 사용 </button>
+      <input id="textInput" placeholder="Type something" />
+      <p id="textOutput"></p>
+    `;
+
+    document.getElementById("a").addEventListener("click", increase);
+    document.getElementById("b").addEventListener("click", handleClick);
+
+    document.getElementById("textInput").addEventListener("input", (e) => {
+      setText(e.target.value);
+    });
+  }
+
+  document.getElementById("textInput").value = text();
 }
 
 App();
