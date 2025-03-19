@@ -18,7 +18,7 @@ function App() {
     } else {
       console.log("🔴 아이디와 비밀번호를 입력하세요!");
     }
-  }, [isLoggedIn]); // username(), password()
+  }, [isLoggedIn()]);
 
   // callback 체크 
   useEffect(() => {
