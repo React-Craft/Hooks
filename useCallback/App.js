@@ -1,7 +1,7 @@
 function App() {
   stateStore.resetStateIndex();
   console.log("✅✅✅ 랜더링 ✅✅✅");
-
+  // 
   const [count, setCount] = useState(0);
   const [text, setText] = useState("");
 
