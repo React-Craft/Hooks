@@ -4,10 +4,13 @@ function App() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [text, setText] = useState("");
+  const [count, setCount] = useState(0);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const usernameRef = useRef(null);
-
+  const loginBtnRef = useRef(null); 
+  
   const handleLogin = useCallback(() => {
     if (username() && password()) {
       console.log(`🟢 로그인 성공! ID: ${username()}, PW: ${password()}`);
@@ -15,11 +18,22 @@ function App() {
     } else {
       console.log("🔴 아이디와 비밀번호를 입력하세요!");
     }
-  }, [username(), password()]);
+  }, [isLoggedIn]); // username(), password()
 
+  // callback 체크 
   useEffect(() => {
-    console.log("🎯 로그인 상태 변경됨:", isLoggedIn());
-  }, [isLoggedIn()]);
+    console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
+  }, [handleLogin]);
+
+
+  // useEffect(() => {
+  //   console.log("🎯 로그인 상태 변경됨:", isLoggedIn());
+  // }, [isLoggedIn()]);
+
+  function handleHover() {
+    console.log(" 버튼 위에 마우스 올림", loginBtnRef.current);
+    setCount(count() + 1);
+  }
 
   let app = document.getElementById("app");
   if (!app.innerHTML) {
@@ -44,12 +58,19 @@ function App() {
     });
   }
 
+
+  loginBtnRef.current = document.getElementById("loginBtn");
+  loginBtnRef.current.onmouseover = handleHover;
+
+
   document.getElementById("usernameInput").value = username();
   document.getElementById("passwordInput").value = password();
 
   document.getElementById("statusMessage").textContent = isLoggedIn()
     ? `✅ ${username()}님, 환영합니다!`
     : "❌ 로그인해주세요.";
+
+
 }
 
 App();
