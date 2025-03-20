@@ -9,22 +9,43 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const loginBtnRef = useRef(null); 
-  
+  const loginBtnRef = useRef(null);
+
+  //@@@@@@@@@@@@@@@@@@ 스냅샷을 위해 임시 구현 @@@@@@@@@@@@@@@@@@ //
+  const [initialUsername, setInitialUsername] = useState("");
+  const [initialPassword, setInitialPassword] = useState("");
+
+  // const dep = [username(), password()];
+  const dep = [isLoggedIn()];
+
+  useEffect(() => {
+    setInitialUsername(username());
+    setInitialPassword(password());
+  }, dep);
+  //@@@@@@@@@@@@@@@@@@ 스냅샷을 위해 임시 구현 @@@@@@@@@@@@@@@@@@ //
+
   const handleLogin = useCallback(() => {
-    if (username() && password()) {
+    if (initialUsername() && initialPassword()) {
       console.log(`🟢 로그인 성공! ID: ${username()}, PW: ${password()}`);
       setIsLoggedIn(true);
     } else {
       console.log("🔴 아이디와 비밀번호를 입력하세요!");
     }
-  }, [isLoggedIn()]);
+  }, dep);
 
-  // callback 체크 
+  // const handleLogin = useCallback(() => {
+  //   if (username && password) {
+  //     console.log(`🟢 로그인 성공! ID: ${username()}, PW: ${password()}`);
+  //     setIsLoggedIn(true);
+  //   } else {
+  //     console.log("🔴 아이디와 비밀번호를 입력하세요!");
+  //   }
+  // }, [isLoggedIn()]);
+
+  // callback 체크
   useEffect(() => {
     console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
   }, [handleLogin]);
-
 
   // useEffect(() => {
   //   console.log("🎯 로그인 상태 변경됨:", isLoggedIn());
@@ -58,10 +79,8 @@ function App() {
     });
   }
 
-
   loginBtnRef.current = document.getElementById("loginBtn");
   loginBtnRef.current.onmouseover = handleHover;
-
 
   document.getElementById("usernameInput").value = username();
   document.getElementById("passwordInput").value = password();
@@ -69,8 +88,6 @@ function App() {
   document.getElementById("statusMessage").textContent = isLoggedIn()
     ? `✅ ${username()}님, 환영합니다!`
     : "❌ 로그인해주세요.";
-
-
 }
 
 App();
