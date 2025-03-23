@@ -2,8 +2,6 @@ function App() {
   stateStore.resetStateIndex();
   console.log("✅✅✅ 랜더링 ✅✅✅");
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [text, setText] = useState("");
   const [count, setCount] = useState(0);
 
@@ -11,7 +9,11 @@ function App() {
 
   const loginBtnRef = useRef(null);
 
-  //@@@@@@@@@@@@@@@@@@ 스냅샷을 위해 임시 구현 @@@@@@@@@@@@@@@@@@ //
+  // 스냅샷의 문제 시발점
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  //@@@@@@@@@@@@@@@@@@ 스냅샷을 위해 임시 구현 @@@@@@@@@@@@@@@@@@
   const [initialUsername, setInitialUsername] = useState("");
   const [initialPassword, setInitialPassword] = useState("");
 
@@ -32,15 +34,6 @@ function App() {
       console.log("🔴 아이디와 비밀번호를 입력하세요!");
     }
   }, dep);
-
-  // const handleLogin = useCallback(() => {
-  //   if (username && password) {
-  //     console.log(`🟢 로그인 성공! ID: ${username()}, PW: ${password()}`);
-  //     setIsLoggedIn(true);
-  //   } else {
-  //     console.log("🔴 아이디와 비밀번호를 입력하세요!");
-  //   }
-  // }, [isLoggedIn()]);
 
   // callback 체크
   useEffect(() => {
