@@ -18,24 +18,23 @@ function App() {
   const [initialPassword, setInitialPassword] = useState("");
 
   // const dep = [username(), password()];
-  const dep = [isLoggedIn()];
+  // const dep = [isLoggedIn()];
 
-  useEffect(() => {
-    setInitialUsername(username());
-    setInitialPassword(password());
-  }, dep);
+  // useEffect(() => {
+  //   setInitialUsername(username());
+  //   setInitialPassword(password());
+  // }, dep);
   //@@@@@@@@@@@@@@@@@@ 스냅샷을 위해 임시 구현 @@@@@@@@@@@@@@@@@@ //
 
   const handleLogin = useCallback(() => {
-    if (initialUsername() && initialPassword()) {
-      console.log(`🟢 로그인 성공! ID: ${username()}, PW: ${password()}`);
+    if (username() && password()) {
       setIsLoggedIn(true);
     } else {
       console.log("🔴 아이디와 비밀번호를 입력하세요!");
     }
-  }, dep);
+  }, [isLoggedIn()]);
 
-  // callback 체크
+  // // callback 체크
   useEffect(() => {
     console.log("🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯");
   }, [handleLogin]);

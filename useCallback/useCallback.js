@@ -5,14 +5,20 @@ function useCallback(callback, dependencies) {
   stateStore.stateIndex++;
 
   if (!useCallbackStore[currentIndex]) {
+    console.log("마운트");
+
     useCallbackStore[currentIndex] = {
       dependencies: undefined,
       callback: undefined,
+      cleanup: undefined,
     };
   }
 
-  const { dependencies: prevDependencies, callback: prevCallback } =
-    useCallbackStore[currentIndex];
+  const {
+    dependencies: prevDependencies,
+    callback: prevCallback,
+    cleanup: prevCleanup,
+  } = useCallbackStore[currentIndex];
 
   let hasChanged = !prevDependencies;
   if (!hasChanged) {
@@ -25,9 +31,18 @@ function useCallback(callback, dependencies) {
   }
 
   if (hasChanged) {
-    useCallbackStore[currentIndex] = { dependencies, callback };
+    if (prevDependencies) {
+      console.log("업데이트");
+    }
+
+    if (prevCleanup) prevCleanup();
+
+    const cleanup = callback();
+    useCallbackStore[currentIndex] = { dependencies, callback, cleanup };
+
     return callback;
   }
 
+  console.log("메모");
   return prevCallback;
 }
